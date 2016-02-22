@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: CakePHP Elements
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 6
+wordpress_url: http://blog.sixteenink.com/post/21166751822
+date: '2012-04-15 14:27:00 +0000'
+date_gmt: '2012-04-15 14:27:00 +0000'
+categories:
+- CakePHP
+- PHP
+tags:
+- cakephp
+- elements
+- php
+- includes
+- webdesign
+comments: []
+---
+<p>This is a basic tip which comes in handy. Elements allow you to place blocks of code that are repeated or reused in your application. They also come in handy if you are just looking to tidy up that view of yours.</p>
+<p>In this example we are going to take our login form and make it an element. Then we will call it on our page. This tip is to show how to add an element, so don't worry if you don't understand the login code. Lets name this file login.ctp and put it in our /App/View/Elements folder.</p>
+<h2></h2></p>
+{% highlight php %}
+<?php echo $this->Form->create('User', array('action' => 'login'));
+    echo $this->Form->input('email_address',array('label' => '', 'class'=>'span3', 'placeholder' => 'Email Address'));
+    echo $this->Form->input('password',array('label' => '', 'class'=>'span3', 'placeholder' => 'password'));
+    echo $this->Form->end(array('label' => 'Sign In', 'value' => 'Sign In', 'class' => 'btn btn-primary'));
+    ?>
+{% endhighlight %}
+And in our view file (/App/View/Pages/home.ctp or whatever View you are working on)</p>
+{% highlight php %}
+<?php echo $this->element('login'); ?>
+{% endhighlight %}
+That's it! You should now have the basics to including an Element in your View! Congratulations! We knew <em>you</em> could do it!></p>

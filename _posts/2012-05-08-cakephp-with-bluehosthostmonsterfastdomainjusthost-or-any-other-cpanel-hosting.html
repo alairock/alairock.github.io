@@ -1,0 +1,71 @@
+---
+layout: post
+status: publish
+published: true
+title: CakePHP with Bluehost or any other Cpanel hosting.
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 72
+wordpress_url: http://www.sixteenink.com/?p=72
+date: '2012-05-08 01:59:17 +0000'
+date_gmt: '2012-05-08 01:59:17 +0000'
+categories:
+- CakePHP
+- PHP
+tags:
+- cakephp
+- php
+- Bluehost
+- FastDomain
+- Hostmonster
+- Wordpress
+- CakePHP Core
+- CakePHP App
+comments: []
+---
+<p style="text-align: center;"><a href="http://www.sixteenink.com/wp-content/uploads/2012/05/cakephp.png"><img class=" wp-image-75 aligncenter" title="cakephp" src="http://www.sixteenink.com/wp-content/uploads/2012/05/cakephp.png" alt="" width="552" height="240" /></a></p><br />
+<em><span style="color: #ff0000;">NOTE</span>: This is for ADVANCED users. CakePHP requires an extensive knowledgebase of PHP and Object Oriented Programming. If you are not familiar with PHP or OOP this is not for you. Try installing WordPress instead.</em></p>
+<p>This is for the majority of cpanel hosting companies, especially Bluehost (The greatest cpanel hosting company out there, and that's not just an opinion).</p>
+<p>CakePHP by default comes with the core in a folder, the <strong><em>same</em></strong> folder that the app directory is also located. This is typically considered not secure. So lets fix that. Let's put our CakePHP Core in the root of your hosting account.</p>
+<p>Step 1. Download CakePHP from <a href="http://cakephp.org/">their website</a>.</p>
+<p>Step 2. FTP your cakephp.zip file to the public_html directory (OR the folder your application will be), extract the cakephp.zip file. You should have a folder that looks like the following.</p>
+{% highlight bash %}
+cakephp-cakephp-77aa960/
+    -app/
+    -build.properties
+    -build.xml
+    -.gitignore
+    -.htaccess
+    -index.php
+    -lib/
+    -plugins/
+    -README
+    -.travis.yml
+    -vendors/
+{% endhighlight %}
+
+Step 3. Move all the files out of the app/ folder. (The contents of the App/ folder, not the folder itself)</p>
+<p>Step 4. Move the cakephp-cakephp-77aa960/ folder to the ~/ directory. At this point I recommend <em><strong>renaming</strong></em> it to something that takes less time to type. I will call it CakeCore.</p>
+<p>Step 5. Inside your app/ directory that you copied the contents out of [step 3] there is a subdirectory called webroot. Edit the <em>index.php </em>[/webroot/index.php] file and make the following change.</p>
+<p>Original:</p>
+{% highlight php %}
+<?
+    //define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
+{% endhighlight %}
+
+Change it to:</p>
+{% highlight php %}
+<?
+    define('CAKE_CORE_INCLUDE_PATH', '/home/username/CakeCore/lib');
+{% endhighlight %}
+
+Bluehost has the home directory as many different things. /home, /home1, /home2 , etc followed by the official cpanel/bluehost username, which you can find on the left side of your cpanel. Be sure you replace the above with <em>YOUR</em> information.</p>
+<p> </p>
+<p><strong>THATS IT!</strong><br />
+There should be nothing more that you have to configure. From this point on you can reuse your CakePHP Core AND get the benefit of security now that your core code cannot be touched.</p>
+<p> </p>

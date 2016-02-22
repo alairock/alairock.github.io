@@ -1,0 +1,68 @@
+---
+layout: post
+status: publish
+published: true
+title: Separating CakePHP App from Core.
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 7
+wordpress_url: http://blog.sixteenink.com/post/20997017523
+date: '2012-04-12 19:28:00 +0000'
+date_gmt: '2012-04-12 19:28:00 +0000'
+categories:
+- CakePHP
+- PHP
+tags:
+- cakephp
+- php
+- html
+- programming
+- web 2.0
+comments: []
+---
+<p>Separating CakePHP App from Core.</p>
+<p>Why would I do that?<br />
+-Easy to upgrade<br />
+-Easy to deploy new apps<br />
+-App isolation from Core</p>
+<p>These steps should be fairly straight forward and easy to follow. The way we set it up puts the core in the root, so this will be good for local installations on mac/linux. You can set it up for a shared environment, but I will leave that for another day.</p>
+<p>Note: This is showing CakePHP 2.1.1 but the steps are the same for later versions.</p>
+<p><strong>Step 1 - Download core and place files in the proper folders.</strong><br />
+Make the initial directories. The first is what we will connect our App&rsquo;s to. The second will contain the core itself.</p>
+{% highlight bash %}mkdir /var/cake
+mkdir ~/CoreCode
+{% endhighlight %}
+Now lets download CakePHP from <a href="http://cakephp.org" target="_blank">CakePHP.org</a> and extract it to our folder. Then lets rename it to something easier to read.</p>
+{% highlight bash %}cd ~/CoreCode
+wget <a href="https://github.com/cakephp/cakephp/tarball/2.1.1" target="_blank">https://github.com/cakephp/cakephp/tarball/2.1.1</a><br />
+tar -zxvf<br />
+mv cakephp-cakephp-0cad237 cakephp-2.1.1
+{% endhighlight %}
+<strong>Step 2 - link the core directory to our CakePHP core.</strong></p>
+{% highlight bash %}cd /var/cake
+ln -sfn ~/CoreCode/cakephp-2.1.1/ cakephp2
+{% endhighlight %}
+Now we can take the app folder from the CakePHP core (in ~/CakeCore/cakephp-2.1.1) and place it in our webroot that will broadcast our applications. This can be in a variety of places. /var/www; /var/webroot; ~/public_html and more depending on the server configuration.</p>
+{% highlight bash %}cd ~/CakeCore/cakephp-2.1.1
+cp -av App ~/public_html/
+{% endhighlight %}
+Note: at this point the &lsquo;App&rsquo; folder doesn&rsquo;t need to be called &lsquo;App&rsquo; it can be named anything, or you can take it&rsquo;s contents out and place them in which ever directory you desire.</p>
+<p><strong> Step 3 - Configure the application to the core</strong><br />
+This is clearly the most important step. Change the Keys and connect to the database. This is normal and won&rsquo;t be covered. What <em>is</em> different is now we will link our App to our Core. Navigate to App/Webroot and open index.php Uncomment the following line:</p>
+{% highlight php %}
+<?
+//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
+{% endhighlight %}
+and change it to the following:</p>
+{% highlight php %}
+<?
+define('CAKE_CORE_INCLUDE_PATH', DS.'var'.DS.'cake'.DS.'cakephp2'.DS.'lib');
+{% endhighlight %}
+<strong>THATS IT!</strong><br />
+We should be all configured and setup now to connect properly to our core. We can repeat this step as needed. You can also download this awesome start app which includes <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a> (a killer CSS library) and <a href="http://jquery.com/" target="_blank">jQuery</a>.</p>
+<p>Click <a href="https://github.com/alairock/CakeApp" target="_blank">here</a> to download the starter app.</p>

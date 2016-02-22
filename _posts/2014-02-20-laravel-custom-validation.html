@@ -1,0 +1,53 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Laravel: Custom Validation'
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 266
+wordpress_url: http://www.sixteenink.com/?p=266
+date: '2014-02-20 00:56:46 +0000'
+date_gmt: '2014-02-20 00:56:46 +0000'
+categories:
+- Tutorials
+- Laravel 4
+tags:
+- laravel
+- laravel4
+- custom validation
+- custom validator
+- namespace validator
+comments: []
+---
+<p>Laravel form validation is simple enough, but what if you want to extend the validation and do your own?</p>
+<p>It's easy enough to do if you are doing everything in the routing, but that is going to get out of control really quickly. You can even abstract it another level into the controller, and even that becomes repetitive. If you have done any Googling, you have probably seen <a title="Validation Services Setup by Jeffrey Way" href="https://tutsplus.com/lesson/validation-services/" target="_blank">this tutorial</a> by <a title="@jeffrey_way" href="https://twitter.com/jeffrey_way" target="_blank">Jeffrey Way</a>. This will get you about 90% of the way there. But what if you want a CUSTOM validation method? Continuing from where Jeffrey left off, lets say you have the following `$rules`.</p>
+{% highlight php %}
+<?
+public static $rules = [
+	'title' => 'required',
+	'body' => 'required|divisible_by_two'
+];
+{% endhighlight %}
+Notice, the above should be the same as from the custom validation class in the aforementioned tutorial, save for one change. We have added `divisible_by_two`. This is making reference to a not yet created validation rule. Lets go ahead and add that now. I am going to start by adding a new constructor inside the Services\Validators\Post class. Remember we need to include `parent::__construct();` in order to keep the changes from the <em>abstract <strong>validator</strong> class</em>.</p>
+{% highlight php %}
+<?
+public function __construct() {
+	parent::__construct();
+	\Validator::extend('divisible_by_two', 'Services\Validators\Post@divisible_by_two');
+}
+{% endhighlight %}
+Note: In the above uses namespaces for the second parameter in `Validator::extend()`. This is key, since we are using namespaces, we need to remember them here.</p>
+<p>Lastly we need to add our method that does the actual validation.</p>
+{% highlight php %}
+<?
+public function divisible_by_two($attribute, $value, $parameters) {
+        return ($value % 2) === 0;
+}
+{% endhighlight %}
+And that should be it! Your custom validator should now be in effect. Drink Responsibly!</p>

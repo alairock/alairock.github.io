@@ -1,0 +1,46 @@
+---
+layout: post
+status: publish
+published: true
+title: Two column matching heights
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 149
+wordpress_url: http://www.sixteenink.com/?p=149
+date: '2012-10-23 21:08:21 +0000'
+date_gmt: '2012-10-23 21:08:21 +0000'
+categories:
+- PHP
+- Design
+- CSS
+- HTML
+tags:
+- jquery
+- css
+- div heights
+- divs
+- no javascript
+- javascript
+- fun with css
+- killer css from the dark side of the moon
+comments: []
+---
+<p>This comes from a post here: http://www.joestrong.co.uk/blog/css-tip-how-to-match-column-heights-in-css/</p>
+<p>A huge problem (come on CSS devs, we're ready for smarter code! We shouldn't needs jquery or LESS to fix your crap!) is matching a heights to a sibling div.</p>
+<p>eg: <a href="http://jsfiddle.net/9d5f2/">http://jsfiddle.net/9d5f2/</a></p>
+<p>Notice how in the preview it shows the yellow as much shorter than the pink? What if we wanted the sibling divs to match in height? Well we could use jQuery, or some other javascript library to finagle the height to the same as it's sibling, but that just isn't necessary. Not only does it require you to likely use a library such as jQuery (including ANOTHER http request) but it also has to process the action.</p>
+<p><strong>SOLUTION:</strong></p>
+<p>Simply add the following to the short column's css:</p>
+{% highlight css %}
+    padding-bottom: 30000px;
+    margin-bottom: -30000px;
+{% endhighlight %}
+<em>And that is it.</em><br />
+Q: What is it doing?<br />
+A: The padding-bottom action will push the height to 30,000 (plus the height of the original div) <em>then<strong> </strong></em><strong></strong>it will use the margin-bottom to reign in the excess. Can I explain it better? Sure. Will I? NO! Just try it out, it works!</p>
+<p> </p>

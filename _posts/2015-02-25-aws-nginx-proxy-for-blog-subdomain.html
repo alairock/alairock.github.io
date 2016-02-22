@@ -1,0 +1,34 @@
+---
+layout: post
+status: publish
+published: true
+title: AWS Nginx Proxy for blog subdomain.
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 301
+wordpress_url: http://www.sixteenink.com/?p=301
+date: '2015-02-25 16:24:24 +0000'
+date_gmt: '2015-02-25 16:24:24 +0000'
+categories:
+- Uncategorized
+tags: []
+comments: []
+---
+tldr;
+{% highlight nginx %}
+location ^~ /blog {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_redirect off;
+    proxy_pass http://wordPress-3211562.us-west-2.elb.amazonaws.com/blog;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    server_name_in_redirect off;
+    port_in_redirect off;
+}
+{% endhighlight %}

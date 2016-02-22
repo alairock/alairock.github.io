@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Recursive delete folder in php
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 97
+wordpress_url: http://www.sixteenink.com/?p=97
+date: '2012-06-08 16:24:23 +0000'
+date_gmt: '2012-06-08 16:24:23 +0000'
+categories:
+- PHP
+tags:
+- php
+- remove folder
+- server tasks with php
+comments: []
+---
+<p>This problem came up where I needed to remove a folder. Removing a folder is easy, only the PHP command rmdir() only removes the folder if it is empty. The PHP command unlink() is only for files.</p>
+<p>So how do I recursively delete a folder that might not be empty? Here is a function for you:</p>
+{% highlight php %}
+<?
+ function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ }
+ {% endhighlight %}
+Then just call it with the non-empty folder you want to remove.</p>
+{% highlight php %}
+<?
+rrmdir('folderName');
+{% endhighlight %}
+ </p>

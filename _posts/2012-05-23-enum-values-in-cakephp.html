@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Enum Values in CakePHP
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 93
+wordpress_url: http://www.sixteenink.com/?p=93
+date: '2012-05-23 00:03:03 +0000'
+date_gmt: '2012-05-23 00:03:03 +0000'
+categories:
+- CakePHP
+- PHP
+tags: []
+comments: []
+---
+<p>MySQL is one of many DBS's. Because of this CakePHP doesn't support Enums. So what do you do?</p>
+<p>You have to support it on your own, FORTUNATELY it's not too tough. First thing lets grab our enum values and punch them into an array.</p>
+
+{% highlight php %}
+<?
+$myValues = $this->ModelName->getColumnType('enum_values');
+preg_match_all("/'(.*?)'/", $myValues, $enums);
+{% endhighlight %}
+
+Then lets use compact to push the array <em><strong>to</strong></em> our view!</p>
+
+{% highlight php %}
+<?
+$enum = $enums[1];
+$this->set(compact('enum'));
+{% endhighlight %}
+Then we simply build our array in our view!</p>
+
+{% highlight php %}
+<?
+echo $this->Form->input('enum_values',array('type'=>'select','options'=>$enum));
+{% endhighlight %}
+
+<p>Complete. Now you should have a dropdown menu of options pulled straight out of our enum column!</p>
+<p>ENJOY!</p>

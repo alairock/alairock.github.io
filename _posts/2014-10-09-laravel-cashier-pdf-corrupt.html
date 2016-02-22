@@ -1,0 +1,43 @@
+---
+layout: post
+status: publish
+published: true
+title: Laravel Cashier PDF corrupt
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 295
+wordpress_url: http://www.sixteenink.com/?p=295
+date: '2014-10-09 04:10:11 +0000'
+date_gmt: '2014-10-09 04:10:11 +0000'
+categories:
+- PHP
+- Tutorials
+- Laravel 4
+tags:
+- php
+- laravel
+- laravel 4
+- laravel 5
+- pdf
+- cashier
+- stripe
+- permissions
+comments: []
+---
+<p>Laravel Cashier lets you have these fancy-shmancy PDF downloads of invoices.</p>
+<p>This is awesome, except it seems that in some cases the permissions are not correct... or fall out of correctness. Chmod'ing will fix this.</p>
+<div></div></p>
+<div><del><a href="https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2Flaravel%2Fcashier%2Fissues%2F74&amp;sa=D&amp;sntz=1&amp;usg=AFrqEzcPtQce7s2s2cInZzHVVYPucAKOoA">https://github.com/laravel/cashier/issues/74</a></del>&nbsp;(Link no longer working since Taylor took down the issues &nbsp;*sheds tear*)</div></p>
+<div></div></p>
+<div>
+{% highlight bash %}
+cd [app_path]/vendor/laravel/cashier/src/Laravel/Cashier/bin/linux-x86_64
+chmod a+x phantomjs
+{% endhighlight %}
+</div></p>
+<p><strong>Note:&nbsp;</strong>That path above may not necessarily be in <code>linux-x86_64</code> as it will depend on your system. Be sure to verify which system you are running and update this path accordingly.</p>

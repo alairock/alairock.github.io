@@ -1,0 +1,46 @@
+---
+layout: post
+status: publish
+published: true
+title: Div height 100% minus Xpx solution
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 189
+wordpress_url: http://www.sixteenink.com/?p=189
+date: '2013-01-24 05:47:40 +0000'
+date_gmt: '2013-01-24 05:47:40 +0000'
+categories:
+- Design
+- CSS
+- HTML
+- Tutorials
+tags:
+- html
+- css
+- divs
+- css3
+- div height
+- full screen layouts
+comments: []
+---
+<p>CSS should be more friendly. I feel it should have certain math qualities, such as variables, addition, subtraction, multiplication etc.</p>
+<p>A certain problem that is fairly common when working with a 3 or 4 part layout where you have a header, a sidebar and content (sometimes even a footer) Typically if you want to have your content and/or sidebar extend from just below the header to the very bottom, without adding more to the page, requiring useless scroll-down-to-nothingness, this is difficult to do.</p>
+<p>Your first instinct is to make the content height 100%. This doesn't work because you have a header already there, so the height of your page is now 100% + the height of your header. FRUSTRATING, but I get it CSS. I get it.</p>
+<p>Easy solution: 100% - 50px. <strong>WRONG</strong> Like I said. CSS doesn't do math. So what CAN you do?</p>
+<p>See this <a title="Height issue" href="http://jsfiddle.net/DEDX8/1/" target="_blank">JSFiddle</a>. This is an example solution of what I am talking about. It's pretty simple solution.</p>
+{% highlight css %}
+.content {
+    position: absolute; /* very important, this will not work without */
+    top: 50px; /* Set this to the value of the height of whatever div(s) is above it*/
+    right: 0px; /* Absolute will kill your floats, so place it where you need */
+    bottom: 0px; /* This will force the bottom of the div to the bottom. */
+}
+{% endhighlight %}
+The key here is making sure that you understand that you are no longer floating these divs. Because of this, it may not be the ideal solution for all things, but it definitely is great if you are working on full screen layouts.</p>
+<p>This post was kinda thrown on here as an afterthought, so I'm sorry if it is rushed, and please comment below if I missed something, or if you have any suggestions.</p>
+<p>x</p>

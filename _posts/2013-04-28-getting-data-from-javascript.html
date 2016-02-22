@@ -1,0 +1,44 @@
+---
+layout: post
+status: publish
+published: true
+title: Getting data from javascript.
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 201
+wordpress_url: http://www.sixteenink.com/?p=201
+date: '2013-04-28 17:34:10 +0000'
+date_gmt: '2013-04-28 17:34:10 +0000'
+categories:
+- javascript
+tags:
+- javascript
+- json
+- xmlhttprequest
+comments: []
+---
+<p>Most websites I see go in and over-explain how to grab data, eg. json, from an external website. This is a simple explanation of the SIMPLEST way to nab data.</p>
+<p>This is going to go in and grab my gists from github and return the json data.</p>
+{% highlight js %}
+var url = 'https://api.github.com/users/alairock/gists';
+  httpr = new XMLHttpRequest();
+  httpr.open('GET',url, false);
+  httpr.send();
+  var statusText = httpr.statusText;
+  var response = httpr.response;
+  console.log(response);
+{% endhighlight %}
+
+What is giong on? Line-for-line:<br />
+1) Get the url we want to nab data from<br />
+2) instantiate the XMLHttpRequest object, which is used to go get and handle our data<br />
+3) the open method prepares our data to be retrieved and<br />
+4) the send method executes our prepared action<br />
+5) simply assigns the response message (If successful it will receive "ok")<br />
+6) Is the response. This is where all our json data from line 1 is stored.<br />
+7) Just outputs the data to our console.</p>

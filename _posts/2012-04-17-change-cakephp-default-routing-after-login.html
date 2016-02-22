@@ -1,0 +1,57 @@
+---
+layout: post
+status: publish
+published: true
+title: Change CakePHP default routing after login
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 39
+wordpress_url: http://www.sixteenink.com/?p=39
+date: '2012-04-17 22:50:03 +0000'
+date_gmt: '2012-04-17 22:50:03 +0000'
+categories:
+- CakePHP
+- PHP
+tags:
+- cakephp
+- php
+- routes
+- sessions
+- login
+- logout
+comments: []
+---
+<p><a href="http://www.sixteenink.com/wp-content/uploads/2012/04/change-cakephp-default-routing-after-login1.png"><img class="alignnone  wp-image-70" title="change-cakephp-default-routing-after-login" src="http://www.sixteenink.com/wp-content/uploads/2012/04/change-cakephp-default-routing-after-login1.png" alt="" width="552" height="240" /></a></p>
+<p>This is coming directly from <a href="http://www.syahzul.com/cakephp/change-cakephp-default-routing-after-login/">here</a>. That website is out of date, and so here it is, v2.0 fresh.<br />
+I am assuming you understand routes.</p>
+<p>In your bootstrap.php file add the following. This will instantiate CakeSession (after it's inclusion), from there you can check the status of the login and define the routes based on whether the user is logged in or not.</p>
+
+{% highlight php %}
+<?
+// include the Session Component to our application
+App::uses('CakeSession', 'Model/Datasource');
+// now create new SessionComponent instance
+$Session = new CakeSession();
+// check if the user logged in
+if ($Session->read('Auth.User')) {
+    // set the default routing to submissions controller
+    Configure::write('Route.default', array('controller' => 'users', 'action' => 'index'));
+}
+// nope, user not logged in
+else {
+    // set the default routing to our login page in users controller
+    Configure::write('Route.default', array('controller' => 'pages', 'action' => 'display', 'home'));
+}
+{% endhighlight %}
+
+and make sure this is in your routes.php file. Comment out or remove the old line.
+
+{% highlight php %}
+<?
+Router::connect('/', Configure::read('Route.default'));
+{% endhighlight %}

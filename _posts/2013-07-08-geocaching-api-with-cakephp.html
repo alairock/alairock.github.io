@@ -1,0 +1,124 @@
+---
+layout: post
+status: publish
+published: true
+title: GeoCaching API with CakePHP
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 204
+wordpress_url: http://www.sixteenink.com/?p=204
+date: '2013-07-08 15:01:48 +0000'
+date_gmt: '2013-07-08 15:01:48 +0000'
+categories:
+- CakePHP
+- PHP
+- Tutorials
+- API
+- Geocaching
+tags:
+- cakephp
+- php
+- oauth
+- httpsocket
+- api
+- geocaching
+- tftc
+- geocache
+comments: []
+---
+<p>I've been playing with all sorts of API's lately, and one of the most complicated (for the sake of being complicated), is the Geocaching API. They use OAuth for connection. To obtain access (Key/Secret) you need to <a title="Geocaching API" href="http://www.geocaching.com/live/apidevelopers/" target="_blank">go through their process</a>.</p>
+<p>I am using CakePHP for this demonstration, and with CakePHP there is an excellent OAuth component which is what I am using. Find it <a title="CakePHP OAuth Component" href="http://code.42dh.com/oauth/" target="_blank">here</a>.</p>
+<p>Lets say you have the Consumer Key/Secret now. Their OAuth process is a little funky, if you've ever used one before. Here's the broad-strokes view:</p>
+<ol>
+<li><span style="line-height: 15px;">You connect to their staging server, passing them your Consumer Key and Consumer Secret. Url is&nbsp;https://staging.geocaching.com/OAuth/oauth.ashx</span></li>
+<li>Their server will respond with a request token object. You pass the Token's key and the user to -- the same url you got the request token from:&nbsp;https://staging.geocaching.com/OAuth/oauth.ashx</li>
+<li>Once the user okay's your application, Geocaching.com will redirect the user back to the callback url with the OAuth verifier and the OAuth Token. ALMOST there.</li>
+<li>Send the request token (From step 2) and the OAuth Verifier and OAuth Token (Step 3) to what url? Oh it's&nbsp;https://staging.geocaching.com/OAuth/oauth.ashx again.</li>
+<li>The response from step 4) will look the same as the response from step 2, but alas, you are finally finished. They Access Token is the "Key" property in the OAuth Token Object. Save this to the user's session and use it for all requests to their API.</li><br />
+</ol><br />
+The following is the code in CakePHP.</p>
+{% highlight php %}
+<?
+public function getGeoKey() {
+		$this->HttpSocket = $this->__createClient();
+		$requestToken = $this->HttpSocket->getRequestToken('https://staging.geocaching.com/OAuth/oauth.ashx', 'http://localhost/hubstats/hubs/callback');
+		if ($requestToken) {
+			$this->Session->write('geocache_request_token', $requestToken);
+			$this->redirect('https://staging.geocaching.com/OAuth/oauth.ashx?oauth_token=' . $requestToken->key);
+		} else {
+			// an error occured when obtaining a request token
+		}
+	}
+  public function callback() {
+		$requestToken = $this->Session->read('geocache_request_token');
+		$this->HttpSocket = $this->__createClient();
+		$params = array(
+			'oauth_verifier' => $_GET['oauth_verifier'],
+			'oauth_token' => $_GET['oauth_token'],
+		);
+		$accessToken = $this->HttpSocket->getAccessToken('https://staging.geocaching.com/OAuth/oauth.ashx', $requestToken, 'POST', $params);
+		$this->Session->write('access_token', $accessToken->key);
+		$this->redirect(array('action' => 'index'));
+	}
+	private function __createClient() {
+		return new OAuthClient('Consumer_Key', 'Consumer_Secret');
+	}
+{% endhighlight %}
+<h2>Sending a POST request to geocaching.com</h2>
+Geocaching.com's API is a little clunky in terms of POST requests. A few things to remember.</p>
+<ul>
+<li>When sending a request, the Content-Type must be 'application/json'</li>
+<li>Even though its a POST request, in order to get the format back in jason, you must append the url (Like a GET request) eg: https://geocaching.com/api/geocaches?format=Json</li><br />
+</ul><br />
+Enough talk. Here is a sample POST request.</p>
+
+{% highlight php %}
+<?
+public function index() {
+		$data = array(
+			'AccessToken' => $this->Session->read('access_token'),
+			'MaxPerPage' => 10,
+			'PointRadius' => array(
+				'DistanceInMeters' => 20 * 1609, //There are 1609.34 Meters in a mile. Miles x Meters
+				'Point' => array(
+					'Latitude' => '46.06502',
+					'Longitude' => '46.06502',
+				),
+			),
+		);
+		$request = array(
+			'header' => array(
+				'Content-Type' => 'application/json',
+			),
+		);
+		$data = json_encode($data);
+		$response = $this->HttpSocket->post('https://staging.api.groundspeak.com/Live/V6Beta/geocaching.svc/SearchForGeocaches?format=Json', $data, $request);
+		pr($response->body());
+		exit;
+	}
+{% endhighlight %}
+
+<h2>GET requests</h2><br />
+As for GET requests, there's nothing magic about those:</p>
+
+{% highlight php %}
+<?
+public function index() {
+		$data = array(
+			'AccessToken' => $this->Session->read('access_token'),
+			'format' => 'Json'
+		)
+		$response = $this->HttpSocket->get('https://staging.api.groundspeak.com/Live/V6Beta/geocaching.svc/GetAPILimits', $data);
+		pr($response->body());
+		exit;
+	}
+{% endhighlight %}
+
+Notice 'format' key/value pair has been moved into the $data array. This is because we are using the GET method in HttpSocket. The $data is url encoded and passed as part of the URL for the get request, so putting it in the $data as expected, unlike when using POST.</p>
+<h2>Conclusion</h2><br />
+Definitely one of the weirder API's I have run into, but Geocaching is awesome, and I encourage everyone to get out there and try it. Developers should definitely tap into the API and see what kinda cool stuff you can do with it! Happy Geocaching!</p>

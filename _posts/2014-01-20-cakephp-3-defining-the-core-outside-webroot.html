@@ -1,0 +1,59 @@
+---
+layout: post
+status: publish
+published: true
+title: CakePHP 3 - Defining the Core Outside Webroot
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 251
+wordpress_url: http://www.sixteenink.com/?p=251
+date: '2014-01-20 02:08:39 +0000'
+date_gmt: '2014-01-20 02:08:39 +0000'
+categories:
+- CakePHP
+- PHP
+- Tutorials
+tags:
+- cakephp
+- CakePHP Core
+- tutorial
+- cakephp 3
+comments: []
+---
+<p>One thing that CakePHP 3 documentation has you do when you install is put the CakePHP Core inside the vendor directory of the app. If you want to share the CakePHP core between multiple apps you can follow these simple steps.</p>
+<p>Step 1: Install the CakePHP 3 App</p>
+
+{% highlight bash %}
+cd {webroot}
+composer create-project -s dev cakephp/app ./
+{% endhighlight %}
+
+Step 2: Move the CakePHP 3 core to somewhere external
+<p>In this example, I am going to put it inside `/CakeCore/cakephp` but you can put it wherever.</p>
+
+{% highlight bash %}
+mkdir /CakeCore
+mv {webroot}/vendor/cakephp/cakephp /CakeCore/cakephp
+{% endhighlight %}
+
+Step 3: Change the Core Definition in your App</p>
+<p>Lastly we need to point the app to the newly cloned core.</p>
+{% highlight bash %}
+cd {webroot}/App/Config
+vim paths.php
+{% endhighlight %}
+
+And replace this line (approximately line 73):</p>
+{% highlight bash %}
+define('CAKE_CORE_INCLUDE_PATH', ROOT . '/vendor/cakephp/cakephp');
+{% endhighlight %}
+With this line:</p>
+{% highlight bash %}
+define('CAKE_CORE_INCLUDE_PATH', '/CakeCore/cakephp/');
+{% endhighlight %}
+That's it! Continue on your merry way.</p>

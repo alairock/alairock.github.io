@@ -1,0 +1,46 @@
+---
+layout: post
+status: publish
+published: true
+title: CakePHP and jQuery problems.
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 154
+wordpress_url: http://www.sixteenink.com/?p=154
+date: '2012-10-30 02:53:25 +0000'
+date_gmt: '2012-10-30 02:53:25 +0000'
+categories:
+- CakePHP
+tags:
+- cakephp
+- Security
+- Form Fields
+- Ajax
+- Security Component
+- unlockField
+comments: []
+---
+<p>This issue plagued me for way longer than it should. Due to lack of documentation online I figured it would be best to represent it here.</p>
+<p>I kept getting Black-holed. The most common answer I found online was to disable security altogether. (Seriously, don't do that). Rather, the correct answer via consensus in the #CakePHP IRC, as well as multiple other hidden forum posts was to disable it on a per hidden field basis.</p>
+<p>Easy answer. Make this:</p>
+{% highlight php %}
+<?
+echo $this->Form->input('w', array('type' => 'hidden'));
+{% endhighlight %}
+Into this:</p>
+
+{% highlight php %}
+<?
+echo $this->Form->input('w', array('type' => 'hidden', 'security => false));
+{% endhighlight %}
+
+(The last one didn't work for me as was vastly suggested, but the following worked for me and should be an alternate)</p>
+{% highlight php %}
+<? $this->Form->unlockField('Purchase.x');
+{% endhighlight %}
+Happy coding!</p>

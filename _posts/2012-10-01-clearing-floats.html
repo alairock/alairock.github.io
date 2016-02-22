@@ -1,0 +1,44 @@
+---
+layout: post
+status: publish
+published: true
+title: Clearing Floats
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 138
+wordpress_url: http://www.sixteenink.com/?p=138
+date: '2012-10-01 20:58:11 +0000'
+date_gmt: '2012-10-01 20:58:11 +0000'
+categories:
+- Uncategorized
+tags: []
+comments: []
+---
+<p>I lost this article once, and I shall never do that again. This originates from <a href="http://www.quirksmode.org/css/clearing.html">here</a>.</p>
+<p>This is basically all you need to know:</p>
+{% highlight css %}
+div.container {
+	border: 1px solid #000000;
+	overflow: hidden;
+	width: 100%;
+}
+div.left {
+	width: 45%;
+	float: left;
+}
+div.right {
+	width: 45%;
+	float: right;
+}
+{% endhighlight %}
+
+<div class="container" style="overflow: hidden; width: 100%;">
+<div class="left">
+<p><a href="http://www.sixteenink.com/wp-content/uploads/2012/10/Screen-Shot-2012-10-01-at-2.55.51-PM.png"><img class="alignnone size-full wp-image-144" title="Screen Shot 2012-10-01 at 2.55.51 PM" src="http://www.sixteenink.com/wp-content/uploads/2012/10/Screen-Shot-2012-10-01-at-2.55.51-PM.png" alt="" width="460" height="153" /></a></p>
+<p></div><br />
+</div></p>

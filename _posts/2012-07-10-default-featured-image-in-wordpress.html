@@ -1,0 +1,86 @@
+---
+layout: post
+status: publish
+published: true
+title: Default Featured image in WordPress
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 102
+wordpress_url: http://www.sixteenink.com/?p=102
+date: '2012-07-10 23:40:09 +0000'
+date_gmt: '2012-07-10 23:40:09 +0000'
+categories:
+- PHP
+- Design
+- CSS
+- WordPress
+tags:
+- php
+- Wordpress
+- featured images
+- design
+- themes
+- wordpress themes
+comments: []
+---
+<p>This goes out to all the theme developers out there. <strong>EVERY SINGLE DESIGNER NEEDS TO IMPLEMENT THIS NOW</strong></p>
+<p>Featured images are great, unless the user doesn't add them. This solution will allow your template users to have engaging experience with your templates. If you are a template designer, it means more money for you.</p>
+<p>Article can be read here: <a href="http://www.wpbeginner.com/wp-themes/how-to-set-a-default-fallback-image-for-wordpress-post-thumbnails/">http://www.wpbeginner.com/wp-themes/how-to-set-a-default-fallback-image-for-wordpress-post-thumbnails/</a></p>
+<h2>Default WordPress Featured Images</h2><br />
+WordPress has this very cool <a href="http://www.wpbeginner.com/wp-themes/how-to-add-post-thumbnails-in-wordpress/">post thumbnail feature</a> which was added in version 2.9. This feature basically allows you to add a custom image as a thumbnail that represents that post. This feature has become a standard for theme designers. But often, new bloggers forget to set a post thumbnail (featured image) which causes the template display to break. Second, it just looks unprofessional to have broken images or empty areas on homepage where the thumbnail was suppose to be. We believe that theme designers and developers should create a new standard of adding a default fallback image for WordPress post thumbnails in their themes. Popular frameworks like <a href="http://www.wpbeginner.com/refer/studiopress-genesis" rel="nofollow" target="_blank">Genesis</a> already has this type of option built-in where if the user does not specify a post thumbnail (featured image), then the first image attachment within the post will be displayed as the thumbnail. In this article, we will show you two different ways of adding a default fallback image for WordPress Post Thumbnails.</p>
+<p>To utilize the tricks in this post, you have to <a href="http://www.wpbeginner.com/wp-themes/how-to-add-post-thumbnails-in-wordpress/">enable the post thumbnails in your WordPress theme</a>.</p>
+<h2>Adding a Branded Image as the Default Fallback</h2><br />
+Often when creating a custom site for a client, they may have posts that has absolutely no image. So it is always smart for designers to create a branded image that is displayed for posts that has no thumbnail specified. The philosophy of this idea is similar to having a <a href="http://www.wpbeginner.com/wp-tutorials/how-to-change-the-default-gravatar-on-wordpress/">customized gravatar in WordPress</a>. All you really have to do is open the theme file where you are going to display the post thumbnail, this can be (home.php, single.php, loop.php, index.php, archive.php, etc). Then simply paste the following code within the post loop.</p>
+{% highlight php %}
+<?php if ( has_post_thumbnail() ) {
+the_post_thumbnail();
+} else { ?>
+<img src="<?php bloginfo('template_directory'); ?>/images/default-image.jpg" alt="<?php the_title(); ?>">
+<?php } ?>
+{% endhighlight %}
+
+<strong>Explanation:</strong> The code checks if the post has a specified thumbnail, and if there is, then it will display the post thumbnail. If there is no post thumbnail specified, then it will display <strong>&lsquo;default-image.jpg&rsquo;</strong> image from your theme&rsquo;s images folder.</p>
+<p>This is the very basic example. You can obviously expand on it with thumbnail sizes, class and much more.</p>
+<h2>Adding the First Post Image as the Default Fallback</h2><br />
+Often new bloggers add images to the post, but either they forget to specify a post thumbnail, or they simply do not know how to. Regardless of what the case is, we as developers should prepare in advance. So the trick that we have seen used specially in theme frameworks like <a href="http://www.wpbeginner.com/refer/studiopress-genesis" rel="nofollow" target="_blank">Genesis</a> is adding the first post image as the default fallback for WordPress post thumbnails. To do this, you have to open your theme&rsquo;s<em>functions.php</em> file and add the following codes:</p>
+
+{% highlight php %}
+<?
+//function to call first uploaded image in functions file
+function main_image() {
+$files = get_children('post_parent='.get_the_ID().'&post_type=attachment
+&post_mime_type=image&order=desc');
+  if($files) :
+    $keys = array_reverse(array_keys($files));
+    $j=0;
+    $num = $keys[$j];
+    $image=wp_get_attachment_image($num, 'large', true);
+    $imagepieces = explode('"', $image);
+    $imagepath = $imagepieces[1];
+    $main=wp_get_attachment_url($num);
+		$template=get_template_directory();
+		$the_title=get_the_title();
+    print "<img src='$main' alt='$the_title' class='frame' />";
+  endif;
+}
+{% endhighlight %}
+Then open the theme file where you are displaying the WordPress post thumbnail, this can be (home.php, single.php, loop.php, index.php, archive.php, etc) and paste the following code:</p>
+
+{% highlight php %}
+<?php if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) {
+  echo get_the_post_thumbnail($post->ID);
+} else {
+   echo main_image();
+} ?>
+{% endhighlight %}
+
+<p><strong>Explanation:</strong> First we create a function that gets the first image attachment for each post. In our theme file code, we check if the post has a thumbnail. If the thumbnail exist, then we display the thumbnail, and if it does not exist, then we display the fallback.</p>
+<p>Source: <a href="http://snipplr.com/view/45260/wordpress-post-thumbs-fallback/" rel="nofollow" target="_blank">Snipplr</a></p>
+<p>This is just the start. You can get creative with the fallback images for WordPress post thumbnails. You can combine the two techniques mentioned above, create branded images for each category, and much more.</p>
+<p>If you are a theme developer, then make sure you have this in your themes.</p>
+<p> </p>

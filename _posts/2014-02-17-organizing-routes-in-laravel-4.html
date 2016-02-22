@@ -1,0 +1,49 @@
+---
+layout: post
+status: publish
+published: true
+title: Organizing routes in Laravel 4
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 263
+wordpress_url: http://www.sixteenink.com/?p=263
+date: '2014-02-17 17:38:23 +0000'
+date_gmt: '2014-02-17 17:38:23 +0000'
+categories:
+- PHP
+- Tutorials
+- Laravel 4
+tags:
+- php
+- programming
+- laravel
+- laravel 4
+- tutorials
+- code
+comments: []
+---
+<p>Laravel 4 is centered almost completely around routing. So organizing it is a must. There is no default organization for routes, but we can easily fix this.</p>
+<p>Add the following to your `bootstrap/start.php` file:</p>
+
+{% highlight php %}
+<?
+/**
+ * Require Routes for better organization.
+ */
+$files = new FilesystemIterator(dirname(dirname(__FILE__)) . '/app/routes');
+foreach ($files as $file)
+{
+    if ($file->isFile())
+    {
+        require $file->getPathname();
+    }
+}
+{% endhighlight %}
+
+Then you can create a `routes` directory inside the `app` folder and save your routes in there. You can name them whatever you want, but I like to name them after the controller I am working on.</p>
+<p>Happy coding!</p>
