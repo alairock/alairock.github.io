@@ -27,11 +27,11 @@ docker run -v `pwd`:/var/www alairock/lumen 'laravel new service-name'
 
 ## Bonus Round!
 
-These containers aren't _just_ good for installing laravel apps. You can also use them for development.
+These containers aren't _just_ good for installing laravel apps. You can also use them for development. (Remember, you need to add `--host=0.0.0.0` in order to make sure that external connections to the artisan server are allowed)
 
 ```bash
 $ cd site-name # or service-name if using lumen
-$ docker run -v `pwd`:/var/www -p "8080:8000" alairock/lumen 'php artisan serve'
+$ docker run -v `pwd`:/var/www -p "8080:8000" alairock/lumen 'php artisan serve --host=0.0.0.0'
 ```
 
 Just don't forget to link to your database, nginx, or whatever other containers you are needing to integrate with.
