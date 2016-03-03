@@ -24,3 +24,14 @@ docker run -v `pwd`:/var/www alairock/laravel 'laravel new site-name'
 ```bash
 docker run -v `pwd`:/var/www alairock/lumen 'laravel new service-name'
 ```
+
+## Bonus Round!
+
+These containers aren't _just_ good for installing laravel apps. You can also use them for development.
+
+```bash
+$ cd site-name # or service-name if using lumen
+$ docker run -v `pwd`:/var/www alairock/lumen 'php artisan serve'
+```
+
+Just don't forget to link to your database, nginx, or whatever other containers you are needing to integrate with.
