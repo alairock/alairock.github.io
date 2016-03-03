@@ -31,7 +31,7 @@ These containers aren't _just_ good for installing laravel apps. You can also us
 
 ```bash
 $ cd site-name # or service-name if using lumen
-$ docker run -v `pwd`:/var/www alairock/lumen 'php artisan serve'
+$ docker run -v `pwd`:/var/www -p "8080:8000" alairock/lumen 'php artisan serve'
 ```
 
 Just don't forget to link to your database, nginx, or whatever other containers you are needing to integrate with.
