@@ -1,19 +1,6 @@
 ---
-layout: post
-status: publish
-published: true
 title: GeoCaching API with CakePHP
-author:
-  display_name: alairock
-  login: alairock
-  email: sblnog@gmail.com
-  url: ''
-author_login: alairock
-author_email: sblnog@gmail.com
-wordpress_id: 204
-wordpress_url: http://www.sixteenink.com/?p=204
-date: '2013-07-08 15:01:48 +0000'
-date_gmt: '2013-07-08 15:01:48 +0000'
+date: 2013-07-08 09:01:48 -06:00
 categories:
 - CakePHP
 - PHP
@@ -29,8 +16,21 @@ tags:
 - geocaching
 - tftc
 - geocache
+layout: post
+status: publish
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 204
+wordpress_url: http://www.sixteenink.com/?p=204
+date_gmt: '2013-07-08 15:01:48 +0000'
 comments: []
 ---
+
 <p>I've been playing with all sorts of API's lately, and one of the most complicated (for the sake of being complicated), is the Geocaching API. They use OAuth for connection. To obtain access (Key/Secret) you need to <a title="Geocaching API" href="http://www.geocaching.com/live/apidevelopers/" target="_blank">go through their process</a>.</p>
 <p>I am using CakePHP for this demonstration, and with CakePHP there is an excellent OAuth component which is what I am using. Find it <a title="CakePHP OAuth Component" href="http://code.42dh.com/oauth/" target="_blank">here</a>.</p>
 <p>Lets say you have the Consumer Key/Secret now. Their OAuth process is a little funky, if you've ever used one before. Here's the broad-strokes view:</p>

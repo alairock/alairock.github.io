@@ -1,6 +1,9 @@
 ---
+title: Docker Workflow
+date: 2016-06-06 00:00:00 -06:00
 published: false
 ---
+
 ## Code workflow using docker
 
 Docker is the best things to happen to code development since git. It allows you to compartmentalize all the dependencies of your code, and run things natively. It also lets you write your code in an environment that can replicate production almost- if not exactly, like production. There are other benefits, but those are the primary ones. So lets get to it. 

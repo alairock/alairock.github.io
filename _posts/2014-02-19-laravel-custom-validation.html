@@ -1,19 +1,6 @@
 ---
-layout: post
-status: publish
-published: true
 title: 'Laravel: Custom Validation'
-author:
-  display_name: alairock
-  login: alairock
-  email: sblnog@gmail.com
-  url: ''
-author_login: alairock
-author_email: sblnog@gmail.com
-wordpress_id: 266
-wordpress_url: http://www.sixteenink.com/?p=266
-date: '2014-02-20 00:56:46 +0000'
-date_gmt: '2014-02-20 00:56:46 +0000'
+date: 2014-02-19 17:56:46 -07:00
 categories:
 - Tutorials
 - Laravel 4
@@ -23,8 +10,21 @@ tags:
 - custom validation
 - custom validator
 - namespace validator
+layout: post
+status: publish
+author:
+  display_name: alairock
+  login: alairock
+  email: sblnog@gmail.com
+  url: ''
+author_login: alairock
+author_email: sblnog@gmail.com
+wordpress_id: 266
+wordpress_url: http://www.sixteenink.com/?p=266
+date_gmt: '2014-02-20 00:56:46 +0000'
 comments: []
 ---
+
 <p>Laravel form validation is simple enough, but what if you want to extend the validation and do your own?</p>
 <p>It's easy enough to do if you are doing everything in the routing, but that is going to get out of control really quickly. You can even abstract it another level into the controller, and even that becomes repetitive. If you have done any Googling, you have probably seen <a title="Validation Services Setup by Jeffrey Way" href="https://tutsplus.com/lesson/validation-services/" target="_blank">this tutorial</a> by <a title="@jeffrey_way" href="https://twitter.com/jeffrey_way" target="_blank">Jeffrey Way</a>. This will get you about 90% of the way there. But what if you want a CUSTOM validation method? Continuing from where Jeffrey left off, lets say you have the following `$rules`.</p>
 {% highlight php %}
