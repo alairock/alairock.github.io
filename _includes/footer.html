@@ -1,5 +1,24 @@
 <script src="assets/js/fartscript.js"></script>
 <script>
   fartscroll();
+  function konami(callback) {
+    let kkeys = [];
+    // up,up,down,down,left,right,left,right,B,A
+    const konami = '38,38,40,40,37,39,37,39,66,65';
+    return event => {
+        kkeys.push(event.keyCode);
+        if (kkeys.toString().indexOf(konami) >= 0) {
+            callback();
+            kkeys = [];
+        }
+    }; 
+  }
+  const handler = konami(() => {
+      console.log('konami 1');
+  });
+  window.addEventListener('keydown', handler);
+  window.addEventListener('keydown', konami(() => {
+      console.log('konami 2');
+  }));
 </script>
 <span>&copy; {{ site.time | date: '%Y' }} {{ site.owner.name }}. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
