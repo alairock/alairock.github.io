@@ -18,8 +18,11 @@
   window.addEventListener('keydown', konami(() => {
       
       particlesJS.load('konami', 'assets/js/particles.json', function() {
+        let kk = document.getElementById("konami");
+        k.style.display = block;
         console.log('konami magic');
       });
   }));
 </script>
+<div id="konami" style="display: block;">&nbsp;</div>
 <span>&copy; {{ site.time | date: '%Y' }} {{ site.owner.name }}. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
