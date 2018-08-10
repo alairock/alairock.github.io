@@ -16,10 +16,9 @@
   }
 
   window.addEventListener('keydown', konami(() => {
-      
+      let kk = document.getElementById("konami");
+      kk.style.display = 'block';
       particlesJS.load('konami', 'assets/js/particles.json', function() {
-        let kk = document.getElementById("konami");
-        kk.style.display = 'block';
         console.log('konami magic');
       });
   }));
