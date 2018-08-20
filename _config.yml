@@ -2,14 +2,16 @@
 title: SixteenInk
 timezone: America/Denver
 collections:
+  medium_posts:
+    title: Medium Posts
+    output: false
+    foo: bar
   posts:
     title: Posts
     output: true
   uploads:
     title: Uploads
     output: true
-  medium_posts:
-    foo: bar
 description: Yes.
 disqus_shortname: sixteenink
 reading_time: true
@@ -23,16 +25,16 @@ owner:
   twitter: alairock
   facebook: alairock
   github: alairock
-  stackexchange:
-  linkedin:
+  stackexchange: 
+  linkedin: 
   instagram: alairock
-  flickr:
-  tumblr:
-  google_plus:
-background:
-google_analytics:
-google_verify:
-bing_verify:
+  flickr: 
+  tumblr: 
+  google_plus: 
+background: 
+google_analytics: 
+google_verify: 
+bing_verify: 
 future: true
 highlighter: rouge
 markdown: kramdown
@@ -52,13 +54,6 @@ kramdown:
   entity_output: as_char
   toc_levels: 1..6
   enable_coderay: true
-  # enable_coderay: false
-  # coderay:
-    # coderay_line_numbers: nil
-    # coderay_line_numbers_start: 1
-    # coderay_tab_width: 4
-    # coderay_bold_every: 10
-    # coderay_css: class
 post_ext: md
 page_ext: md
 post_layout: post
