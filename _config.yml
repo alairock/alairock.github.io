@@ -2,12 +2,14 @@
 title: SixteenInk
 timezone: America/Denver
 collections:
-  posts:
+  - posts:
     title: Posts
     output: true
-  uploads:
+  - uploads:
     title: Uploads
     output: true
+  - medium_posts
+medium_username: alairock
 description: Yes.
 disqus_shortname: sixteenink
 reading_time: true
@@ -21,16 +23,16 @@ owner:
   twitter: alairock
   facebook: alairock
   github: alairock
-  stackexchange: 
-  linkedin: 
+  stackexchange:
+  linkedin:
   instagram: alairock
-  flickr: 
-  tumblr: 
-  google_plus: 
-background: 
-google_analytics: 
-google_verify: 
-bing_verify: 
+  flickr:
+  tumblr:
+  google_plus:
+background:
+google_analytics:
+google_verify:
+bing_verify:
 future: true
 highlighter: rouge
 markdown: kramdown
