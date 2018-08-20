@@ -8,8 +8,6 @@ collections:
   - uploads:
     title: Uploads
     output: true
-  # - medium_posts
-# medium_username: alairock
 description: Yes.
 disqus_shortname: sixteenink
 reading_time: true
