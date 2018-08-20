@@ -2,12 +2,14 @@
 title: SixteenInk
 timezone: America/Denver
 collections:
-  - posts:
+  posts:
     title: Posts
     output: true
-  - uploads:
+  uploads:
     title: Uploads
     output: true
+  medium_posts:
+    foo: bar
 description: Yes.
 disqus_shortname: sixteenink
 reading_time: true
@@ -34,7 +36,8 @@ bing_verify:
 future: true
 highlighter: rouge
 markdown: kramdown
-gems:
+plugins:
+- jekyll-display-medium-posts
 - jekyll-sitemap
 - jekyll-paginate
 - jekyll-gist
@@ -48,13 +51,14 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  enable_coderay: false
-  coderay:
-    coderay_line_numbers: nil
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
+  enable_coderay: true
+  # enable_coderay: false
+  # coderay:
+    # coderay_line_numbers: nil
+    # coderay_line_numbers_start: 1
+    # coderay_tab_width: 4
+    # coderay_bold_every: 10
+    # coderay_css: class
 post_ext: md
 page_ext: md
 post_layout: post
