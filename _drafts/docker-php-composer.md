@@ -1,7 +1,6 @@
 ---
 title: Docker + PHP + Composer Nirvana
 date: 2011-12-27 11:51:20 -07:00
-published: false
 categories:
 - Docker
 - PHP
