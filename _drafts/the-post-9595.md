@@ -5,9 +5,9 @@ categories:
 - Programming
 tags:
 - Python
-- " PHP"
-- " programming"
-- " tutorials"
+- PHP
+- programming
+- tutorials
 layout: post
 ---
 
