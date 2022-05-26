@@ -3,14 +3,14 @@ title: Aftertouch in Logic Pro X and 2015 Macbook Pro
 date: 2016-02-24 00:00:00 -07:00
 categories:
 - Music
-- " Midi"
-- " Hacking"
+- Midi
+- Hacking
 tags:
 - music
-- " logic"
-- " midi"
-- " macbook"
-- " trackpad"
+- logic
+- midi
+- macbook
+- trackpad
 layout: post
 ---
 
