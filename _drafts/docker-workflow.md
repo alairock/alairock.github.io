@@ -1,7 +1,6 @@
 ---
 title: Docker Workflow
 date: 2016-06-06 00:00:00 -06:00
-published: false
 ---
 
 ## Code workflow using docker
