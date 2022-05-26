@@ -1,13 +1,14 @@
 ---
 title: Quick Laravel/Lumen install with Docker!
 date: 2016-03-02 00:00:00 -07:00
+published: false
 categories:
 - Laravel
 tags:
 - php
-- " laravel"
-- " lumen"
-- " tutorial"
+- laravel
+- lumen
+- tutorial
 layout: post
 ---
 
